@@ -19,4 +19,10 @@ describe WordCounter do
     count = WordCounter.new(text).count_words
     expect(count["Hello"]).to eq 2
   end
+
+  xit "is case insensitive"
+  xit "ignores whitespace"
+  xit "ignores puncuation"
+  xit "ignores quotes"
+  xit "handles contractions"
 end

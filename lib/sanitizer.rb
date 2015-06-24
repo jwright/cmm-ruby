@@ -14,7 +14,8 @@ class Sanitizer
     self
   end
 
-  def unsanitize
+  def unsanitize(unsanitized_text=sanitized_text)
+    @sanitized_text = unsanitized_text
     self.rules.reverse.map { |rule| @sanitized_text = rule.unsanitize(sanitized_text) }
     self
   end

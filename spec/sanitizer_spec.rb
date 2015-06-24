@@ -25,5 +25,12 @@ describe Sanitizer do
       expect(rule).to receive(:unsanitize).with(text).and_return(subject)
       subject.unsanitize
     end
+
+    it "can unsanitize different text" do
+      words = "This is some different unsanizied text"
+      subject.sanitize(rule)
+      expect(rule).to receive(:unsanitize).with(words).and_return(subject)
+      subject.unsanitize(words)
+    end
   end
 end

@@ -55,5 +55,12 @@ describe WordCounter do
     expect(count["\""]).to be_nil
   end
 
-  xit "handles contractions"
+  it "handles contractions" do
+    text = "Why don't you live here?"
+    count = WordCounter.new(text).count_words
+    expect(count["don't"]).to eq 1
+  end
+
+  xit "handles numbers"
+  xit "handles time"
 end

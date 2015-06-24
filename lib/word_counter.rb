@@ -7,14 +7,16 @@ class WordCounter
   end
 
   def count_words
-    result_array = []
-
     words = text.scan(/\b(\w+)\b/).flatten
 
     words.to_a.each do |word|
-      result_array << [word, 1]
+      if results.key?(word)
+        results[word] += 1
+      else
+        results[word] = 1
+      end
     end
 
-    results = Hash[*result_array.flatten]
+    results
   end
 end

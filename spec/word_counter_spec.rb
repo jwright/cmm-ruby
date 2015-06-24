@@ -13,4 +13,10 @@ describe WordCounter do
     expect(count["Hello"]).to eq 1
     expect(count["World"]).to eq 1
   end
+
+  it "counts multiple occurances of the same word" do
+    text = "Hello Hello"
+    count = WordCounter.new(text).count_words
+    expect(count["Hello"]).to eq 2
+  end
 end

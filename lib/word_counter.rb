@@ -1,7 +1,5 @@
 require_relative "sanitizer"
-require_relative "contraction_sanitizer_rule"
-require_relative "time_sanitizer_rule"
-require_relative "time_period_sanitizer_rule"
+require_relative "sanitizer_rules"
 
 class WordCounter
   attr_reader :results, :sanitizer, :text

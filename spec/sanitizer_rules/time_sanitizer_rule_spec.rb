@@ -1,4 +1,4 @@
-require "./lib/time_sanitizer_rule"
+require "./lib/sanitizer_rules/time_sanitizer_rule"
 
 describe TimeSanitizerRule do
   subject { TimeSanitizerRule.new }

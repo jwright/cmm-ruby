@@ -1,4 +1,4 @@
-require "./lib/contraction_sanitizer_rule"
+require "./lib/sanitizer_rules/contraction_sanitizer_rule"
 
 describe ContractionSanitizerRule do
   subject { ContractionSanitizerRule.new }

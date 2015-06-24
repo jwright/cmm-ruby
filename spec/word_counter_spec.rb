@@ -46,6 +46,13 @@ describe WordCounter do
     expect(count[","]).to be_nil
   end
 
-  xit "ignores quotes"
+  it "ignores quotes" do
+    text = "We are \"here\" yo."
+    count = WordCounter.new(text).count_words
+    expect(count["here"]).to eq 1
+    expect(count["yo"]).to eq 1
+    expect(count["\""]).to be_nil
+  end
+
   xit "handles contractions"
 end

@@ -10,10 +10,12 @@ class WordCounter
     words = text.scan(/\b(\w+)\b/).flatten
 
     words.to_a.each do |word|
-      if results.key?(word)
-        results[word] += 1
+      insensitive_word = word.downcase
+
+      if results.key?(insensitive_word)
+        results[insensitive_word] += 1
       else
-        results[word] = 1
+        results[insensitive_word] = 1
       end
     end
 

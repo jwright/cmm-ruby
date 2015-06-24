@@ -6,4 +6,11 @@ describe WordCounter do
     count = WordCounter.new(text).count_words
     expect(count["Hello"]).to eq 1
   end
+
+  it "counts the occurances of 2 words" do
+    text = "Hello World"
+    count = WordCounter.new(text).count_words
+    expect(count["Hello"]).to eq 1
+    expect(count["World"]).to eq 1
+  end
 end

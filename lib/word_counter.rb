@@ -1,20 +1,24 @@
-class WordCounter
-  attr_reader :results, :text
+require_relative "sanitizer"
+require_relative "contraction_sanitizer_rule"
 
-  def initialize(text)
+class WordCounter
+  attr_reader :results, :sanitizer, :text
+
+  def initialize(text, sanitizer=Sanitizer.new(text))
     @text = text
     @results = {}
+    @sanitizer = sanitizer
   end
 
   def count_words
-    sanitized_text = sanitize_contractions(text)
+    sanitized_text = sanitizer.sanitize(ContractionSanitizerRule.new).sanitized_text
     sanitized_text = sanitize_time(sanitized_text)
     sanitized_text = sanitize_time_period(sanitized_text)
 
     words = sanitized_text.scan(/\b(\w+)\b/).flatten
 
     words.to_a.each do |word|
-      insensitive_word = unsanitize_contractions word.downcase
+      insensitive_word = sanitizer.unsanitize(word.downcase).sanitized_text
       insensitive_word = unsanitize_time insensitive_word
       insensitive_word = unsanitize_time_period insensitive_word
 
@@ -28,20 +32,12 @@ class WordCounter
     results
   end
 
-  def sanitize_contractions(words)
-    words.gsub /'(?=(d|ll|m|re|s|t|ve))/, "__c__"
-  end
-
   def sanitize_time(words)
     words.gsub /(?<=[\d{1,2}]):(?=[\d{1,2}])/, "__ts__"
   end
 
   def sanitize_time_period(words)
     words.gsub(/[p|P].[m|M]./, "__pm__").gsub(/[a|A].[m|M]./, "__am__")
-  end
-
-  def unsanitize_contractions(words)
-    words.gsub /__c__/, "'"
   end
 
   def unsanitize_time(words)

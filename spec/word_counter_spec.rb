@@ -26,7 +26,13 @@ describe WordCounter do
     expect(count["hello"]).to eq 2
   end
 
-  xit "ignores whitespace"
+  it "ignores whitespace" do
+    text = "Hello          hello"
+    count = WordCounter.new(text).count_words
+    expect(count["hello"]).to eq 2
+    expect(count[" "]).to be_nil
+  end
+
   xit "ignores puncuation"
   xit "ignores quotes"
   xit "handles contractions"

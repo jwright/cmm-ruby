@@ -27,6 +27,9 @@ class WordCounter
       end
     end
 
-    results
+    @results = results.sort do |left, right|
+      comp = right[1] <=> left[1]
+      comp.zero? ? (left[0] <=> right[0]) : comp
+    end.to_h
   end
 end

@@ -78,4 +78,18 @@ describe WordCounter do
     count = WordCounter.new(text).count_words
     expect(count["p.m."]).to eq 1
   end
+
+  describe "sorting" do
+    it "sorts the results by word count" do
+      text = "Hello World. World."
+      count = WordCounter.new(text).count_words
+      expect(count.keys[0]).to eq "world"
+    end
+
+    it "sorts the results alphabetically if they appear the same amount" do
+      text = "Hello Boss"
+      count = WordCounter.new(text).count_words
+      expect(count.keys[0]).to eq "boss"
+    end
+  end
 end

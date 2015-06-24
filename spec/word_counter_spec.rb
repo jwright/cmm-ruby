@@ -34,7 +34,7 @@ describe WordCounter do
   end
 
   it "ignores puncuation" do
-    text = "Hello. World! We,are here."
+    text = "Hello. World! We,are here?"
     count = WordCounter.new(text).count_words
     expect(count["hello"]).to eq 1
     expect(count["world"]).to eq 1
@@ -44,6 +44,7 @@ describe WordCounter do
     expect(count["."]).to be_nil
     expect(count["!"]).to be_nil
     expect(count[","]).to be_nil
+    expect(count["?"]).to be_nil
   end
 
   it "ignores quotes" do

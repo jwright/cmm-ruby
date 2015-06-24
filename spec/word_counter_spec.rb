@@ -61,6 +61,11 @@ describe WordCounter do
     expect(count["don't"]).to eq 1
   end
 
-  xit "handles numbers"
+  it "handles numbers" do
+    text = "There were 500 worlds"
+    count = WordCounter.new(text).count_words
+    expect(count["500"]).to eq 1
+  end
+
   xit "handles time"
 end

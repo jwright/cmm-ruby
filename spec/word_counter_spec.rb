@@ -72,4 +72,10 @@ describe WordCounter do
     count = WordCounter.new(text).count_words
     expect(count["3:16"]).to eq 1
   end
+
+  it "handles time period specification" do
+    text = "It's about 3:16 p.m."
+    count = WordCounter.new(text).count_words
+    expect(count["p.m."]).to eq 1
+  end
 end

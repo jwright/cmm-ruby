@@ -9,12 +9,14 @@ class WordCounter
   def count_words
     sanitized_text = sanitize_contractions(text)
     sanitized_text = sanitize_time(sanitized_text)
+    sanitized_text = sanitize_time_period(sanitized_text)
 
     words = sanitized_text.scan(/\b(\w+)\b/).flatten
 
     words.to_a.each do |word|
       insensitive_word = unsanitize_contractions word.downcase
       insensitive_word = unsanitize_time insensitive_word
+      insensitive_word = unsanitize_time_period insensitive_word
 
       if results.key?(insensitive_word)
         results[insensitive_word] += 1
@@ -34,11 +36,19 @@ class WordCounter
     words.gsub /(?<=[\d{1,2}]):(?=[\d{1,2}])/, "__ts__"
   end
 
+  def sanitize_time_period(words)
+    words.gsub(/[p|P].[m|M]./, "__pm__").gsub(/[a|A].[m|M]./, "__am__")
+  end
+
   def unsanitize_contractions(words)
     words.gsub /__c__/, "'"
   end
 
   def unsanitize_time(words)
     words.gsub /__ts__/, ":"
+  end
+
+  def unsanitize_time_period(words)
+    words.gsub(/__pm__/, "p.m.").gsub(/__am__/, "a.m.")
   end
 end
